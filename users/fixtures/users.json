@@ -1,0 +1,22 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "user_name": "Ivan_92",
+      "first_name": "Иван",
+      "last_name": "Иванов",
+      "email": "ivanov92@mail.ru"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "user_name": "Petr88",
+      "first_name": "Petr",
+      "last_name": "Petrov",
+      "email": "petrov88@yandex.ru"
+    }
+  }
+]
