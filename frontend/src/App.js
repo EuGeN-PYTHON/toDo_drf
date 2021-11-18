@@ -3,7 +3,8 @@ import './App.css';
 import React from 'react'
 import UserList from "./components/users"
 import axios from "axios"
-
+import Footer from "./components/footer"
+import Menu from "./components/menu";
 
 class App extends React.Component {
     constructor(props) {
@@ -48,18 +49,12 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <nav className="three">
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Menu</a></li>
-                    </ul>
-                </nav>
+                <Menu/>
 
                 <UserList users={this.state.users}/>
 
-                <footer className="FOOTER">
-                    Copyright 'Geekbreains'
-                </footer>
+                <Footer/>
+
             </div>
         );
     }
