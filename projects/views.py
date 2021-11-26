@@ -3,6 +3,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer, TemplateHTMLRenderer, StaticHTMLRenderer, \
     AdminRenderer
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 # Create your views here.
@@ -38,4 +39,14 @@ class ToDoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     pagination_class = ToDoLimitOffsetPagination
     filterset_class = ToDoFilter
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.is_active:
+            instance.is_active = False
+        else:
+            instance.is_active = True
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
