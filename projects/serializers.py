@@ -8,8 +8,8 @@ from . import models
 from .models import ToDo, Project
 
 
-class ProjectModelSerializer(HyperlinkedModelSerializer):
-    name = serializers.CharField(max_length=128)
+class ProjectModelSerializer(ModelSerializer):
+    # name = serializers.CharField(max_length=128)
     # users = UserModelSerializer(many=True)
     # users = StringRelatedField(many=True)
     class Meta:
@@ -27,7 +27,7 @@ class ProjectModelSerializer(HyperlinkedModelSerializer):
     #     return instance
 
 
-class ToDoModelSerializer(HyperlinkedModelSerializer):
+class ToDoModelSerializer(ModelSerializer):
     # project = ProjectModelSerializer(read_only=True)
     class Meta:
         model = ToDo
