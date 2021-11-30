@@ -10,7 +10,7 @@ from .models import User
 class UserAdmin(admin.ModelAdmin):
     list_display = ('user_name', 'first_name', 'last_name', 'email')
     fields = (('user_name', 'email'), ('first_name', 'last_name'))
-    readonly_fields = ('email',)
+    # readonly_fields = ('email',)
     ordering = ('user_name', 'first_name', 'last_name', 'email')
     search_fields = ('user_name',)
 
