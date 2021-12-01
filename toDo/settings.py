@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'projects',
     'django_filters',
+    'rest_framework.authtoken'
 
 ]
 
@@ -143,6 +144,11 @@ REST_FRAMEWORK = {
     # 'DEFAULT_RENDERER_CLASSES': (
     #     'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
     #     'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+
 
         # Any other renders
     # ),
