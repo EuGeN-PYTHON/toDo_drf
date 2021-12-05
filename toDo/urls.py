@@ -32,5 +32,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
     path('api-token-auth/', views.obtain_auth_token),
-    url(r'^user/', include('users.urls', namespace='users')),
+    # url(r'^user/', include('users.urls', namespace='users')),
 ]
