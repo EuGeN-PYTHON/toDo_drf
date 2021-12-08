@@ -9,13 +9,15 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
+
+from django.conf.global_settings import LANGUAGE_CODE
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -27,8 +29,6 @@ SECRET_KEY = 'django-insecure-r&%jsxx3vy5enwvli)fuqi*#um1tcy&dctz+_@xjfijg2bw4z3
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
 
 # Application definition
 
@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'users',
     'corsheaders',
+    'projects',
+    'django_filters',
+    'rest_framework.authtoken'
+
 ]
 
 MIDDLEWARE = [
@@ -76,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'toDo.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -86,7 +89,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -106,11 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -119,7 +122,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
@@ -135,3 +137,48 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+
+
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 100,
+    # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+    #     'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ]
+
+    # Any other renders
+    # ),
+    #
+    #     'DEFAULT_PARSER_CLASSES': (
+    #         # If you use MultiPartFormParser or FormParser, we also have a camel case version
+    #         'djangorestframework_camel_case.parser.CamelCaseFormParser',
+    #         'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
+    #         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+    #         # Any other parsers
+    #     ),
+}
+#
+# JSON_CAMEL_CASE = {
+#     'RENDERER_CLASS': 'rest_framework.renderers.UnicodeJSONRenderer'
+# }
+
+# JWT_AUTH = {
+#
+#     'JWT_VERIFY': True,
+#     'JWT_VERIFY_EXPIRATION': True,
+#     'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=3000),
+#     'JWT_AUTH_HEADER_PREFIX': 'JWT',
+# }
