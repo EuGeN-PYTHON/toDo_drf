@@ -9,13 +9,13 @@ const ToDoItem = ({todo, users, projects}) => {
         <tr className="table">
             <td className="TD">{todo.id}</td>
             <td className="TD">
-                {projects.find((project) => project.id == todo.project).name}
-                {/*{todo.project}*/}
+                {/*{projects.find((project) => project.id == todo.project).name}*/}
+                {todo.project}
             </td>
             <td className="TD">{todo.text}</td>
             <td className="TD">
-                {/*{todo.create_user}*/}
-                {users.find((user) => user.id == todo.create_user).user_name}
+                {todo.create_user}
+                {/*{users.find((user) => user.id == todo.create_user).user_name}*/}
             </td>
             <td className="TD">{todo.create_date}</td>
             <td className="TD">{todo.updated_date}</td>

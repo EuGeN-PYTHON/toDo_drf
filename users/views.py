@@ -5,26 +5,34 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer, BrowsableAPIRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 
 from .models import User
 from .serializers import UserModelSerializer
 
 
-class UserModelViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin):
+class UserModelViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
 
 
-class CreateUserAPIView(APIView):
-    permission_classes = (AllowAny,)
+#
+# class UserModelViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet, mixins.UpdateModelMixin):
+#     queryset = User.objects.all()
+#     serializer_class = UserModelSerializer
+#     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
 
-    def post(self, request):
-        user = request.data
-        serializer = UserModelSerializer(data=user)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+#
+# class CreateUserAPIView(APIView):
+#     permission_classes = (AllowAny,)
+#
+#     def post(self, request):
+#         user = request.data
+#         serializer = UserModelSerializer(data=user)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 # @api_view(['POST'])
