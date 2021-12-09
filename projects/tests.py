@@ -2,7 +2,8 @@ import json
 
 from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APIRequestFactory, force_authenticate, APIClient, APISimpleTestCase, APITestCase
+from rest_framework.test import APIRequestFactory, force_authenticate, APIClient, APISimpleTestCase, APITestCase, \
+    CoreAPIClient
 from mixer.backend.django import mixer
 from django.contrib.auth.models import User
 from .views import ProjectModelViewSet, ToDoModelViewSet
@@ -148,3 +149,12 @@ class TestToDoViewSet(APITestCase):
         todo = ToDo.objects.get(id=todo.id)
         self.assertEqual(todo.text, 'text')
         self.client.logout()
+
+    # def test_live_test(self):
+    #     client = CoreAPIClient()
+    #     users = client.get('http://127.0.0.1:8000/api/users/')
+    #     params = {'user_name': 'Petr13', 'first_name': 'Petr', 'last_name':'Petrov', 'email':'petr@mail.ru'}
+    #     client.action(users, ['users', 'create'], params)
+    #     data = client.action(users, ['users', 'list'])
+    #     assert(len(data) == 1)
+    #     assert(data == [{'user_name': 'Petr13', 'first_name': 'Petr', 'last_name':'Petrov', 'email':'petr@mail.ru'}])
