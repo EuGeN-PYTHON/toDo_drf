@@ -4,7 +4,7 @@ from django.db import models
 from users.models import User
 
 
-# NULL_INSTALL = {'null': True, 'blank': True}
+NULL_INSTALL = {'null': True, 'blank': True}
 
 
 class Project(models.Model):
@@ -19,10 +19,10 @@ class Project(models.Model):
 class ToDo(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     text = models.TextField()
-    create_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    create_date = models.DateTimeField(auto_now_add=True, **NULL_INSTALL)
+    updated_date = models.DateTimeField(auto_now=True, **NULL_INSTALL)
     create_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True, **NULL_INSTALL)
 
     def __str__(self):
         return f"Заметка №{self.id}"

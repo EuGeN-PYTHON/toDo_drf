@@ -9,7 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 # Create your views here.
 
 from .models import ToDo, Project
-from .serializers import ToDoModelSerializer, ProjectModelSerializer
+from .serializers import ToDoModelSerializer, ProjectModelSerializer, ToDoModelSerializerBase
 from .filters import ProjectFilter, ToDoFilter
 
 
@@ -39,6 +39,11 @@ class ToDoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     # pagination_class = ToDoLimitOffsetPagination
     filterset_class = ToDoFilter
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return ToDoModelSerializer
+        return ToDoModelSerializerBase
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

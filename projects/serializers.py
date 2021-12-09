@@ -8,6 +8,7 @@ from . import models
 from .models import ToDo, Project
 
 
+
 class ProjectModelSerializer(ModelSerializer):
     # name = serializers.CharField(max_length=128)
     # users = UserModelSerializer(many=True)
@@ -15,7 +16,6 @@ class ProjectModelSerializer(ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
-        # assigned = serializers.SlugRelatedField(slug_field=Project.users, required=False, read_only=True)
 
     # def create(self, validated_data):
     #     return Project(**validated_data)
@@ -27,9 +27,14 @@ class ProjectModelSerializer(ModelSerializer):
     #     return instance
 
 
-class ToDoModelSerializer(ModelSerializer):
+class ToDoModelSerializerBase(ModelSerializer):
     # project = ProjectModelSerializer(read_only=True)
     class Meta:
         model = ToDo
         fields = '__all__'
 
+class ToDoModelSerializer(ModelSerializer):
+    project = ProjectModelSerializer()
+    class Meta:
+        model = ToDo
+        fields = '__all__'
