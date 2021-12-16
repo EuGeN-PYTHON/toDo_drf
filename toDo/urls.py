@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf.urls import url
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
+from graphene_django.views import GraphQLView
 from rest_framework.authtoken import views
 from rest_framework.permissions import AllowAny
 from rest_framework.routers import DefaultRouter
@@ -51,6 +52,7 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger')),
     path('redoc/', schema_view.with_ui('redoc')),
     path('swagger/<str:format>/', schema_view.without_ui()),
+    path("graphql/", GraphQLView.as_view(graphiql=True))
     # url(r'^user/', include('users.urls', namespace='users')),
 
 ]
