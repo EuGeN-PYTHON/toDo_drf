@@ -103,3 +103,11 @@ nav {
     text-align: center;
     color: #74924C;
 }
+
+.btn-out {
+    /*padding: 0;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    background: #E4EFD1;
+}
