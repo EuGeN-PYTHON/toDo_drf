@@ -34,16 +34,16 @@ class ToDoLimitOffsetPagination(LimitOffsetPagination):
 
 class ToDoModelViewSet(ModelViewSet):
     # parser_classes = (NoUnderscoreBeforeNumberCamelCaseJSONParser,)
-    # renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+    renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
     queryset = ToDo.objects.all()
-    serializer_class = ToDoModelSerializer
+    serializer_class = ToDoModelSerializerBase
     # pagination_class = ToDoLimitOffsetPagination
-    filterset_class = ToDoFilter
-
-    def get_serializer_class(self):
-        if self.request.method in ['GET']:
-            return ToDoModelSerializer
-        return ToDoModelSerializerBase
+    # filterset_class = ToDoFilter
+    #
+    # def get_serializer_class(self):
+    #     if self.request.method in ['GET']:
+    #         return ToDoModelSerializer
+    #     return ToDoModelSerializerBase
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()

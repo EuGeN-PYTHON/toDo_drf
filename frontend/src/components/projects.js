@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 //     )
 // }
 
-const ProjectItem = ({project, users}) => {
+const ProjectItem = ({project, users, deleteProject}) => {
     return (
         <tr className="table">
             <td className="TD">{project.id}</td>
@@ -19,7 +19,11 @@ const ProjectItem = ({project, users}) => {
             </td>
             <td className="TD">
                 {project.users.map((userID) => {
-                    return users.find((user) => user.id == userID).user_name}).join(', ')}
+                    return users.find((user) => user.id == userID).user_name
+                }).join(', ')}
+            </td>
+            <td className="TD">
+                <button onClick={() => deleteProject(project.id)} type="button">DELETE</button>
             </td>
         </tr>
     )
@@ -27,16 +31,25 @@ const ProjectItem = ({project, users}) => {
 
 const ProjectList = (
     {
-        projects, users
+        projects, users, deleteProject
     }
 ) => {
     return (
-        <table className="TABLE">
-            <th className="TH"> ID</th>
-            <th className="TH"> Name</th>
-            <th className="TH"> Users</th>
-            {projects.map((project) => <ProjectItem project={project} users={users}/>)}
-        </table>
+        <div>
+            <table className="TABLE">
+                <tr>
+                    <th className="TH"> ID</th>
+                    <th className="TH"> Name</th>
+                    <th className="TH"> Users</th>
+                    <th className="TH"> Delete</th>
+                </tr>
+                {projects.map((project) => <ProjectItem project={project} users={users}
+                                                        deleteProject={deleteProject}/>)}
+            </table>
+            <div className="Link_array">
+                <Link to='/projects/create'>Create Project</Link>
+            </div>
+        </div>
     )
 }
 
