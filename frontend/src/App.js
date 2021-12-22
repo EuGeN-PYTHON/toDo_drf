@@ -15,6 +15,7 @@ import Cookies from 'universal-cookie';
 import projects from "./components/projects";
 import ProjectForm from "./components/ProjectForm";
 import ToDoForm from "./components/ToDoForm";
+import UpProjectForm from "./components/UpProjectForm";
 
 
 class App extends React.Component {
@@ -33,6 +34,21 @@ class App extends React.Component {
         const headers = this.get_headers()
         const data = {name: name, users: users}
         axios.post(`http://127.0.0.1:8000/api/projects/`, data, {headers}).then(response => {
+            // let new_project = response.data
+            // const users = this.state.users.filter((item) => item.id === new_project.users)[0]
+            // new_project.users = users
+            // this.setState({projects: [...this.state.projects, new_project]})
+            this.load_data()
+        }).catch(error => {
+            console.log(error)
+            this.setState({projects: []})
+        })
+    }
+
+    updateProject(name, users, id) {
+        const headers = this.get_headers()
+        const data = {name: name, users: users}
+        axios.put(`http://127.0.0.1:8000/api/projects/${id}/`, data, {headers}).then(response => {
             // let new_project = response.data
             // const users = this.state.users.filter((item) => item.id === new_project.users)[0]
             // new_project.users = users
@@ -221,7 +237,14 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/' component={() => <UserList users={this.state.users}/>}/>
                         <Route exact path='/projects/create' component={() =>
-                            <ProjectForm users = {this.state.users} createProject={(name, users) => this.createProject(name, users)}/>}/>
+                            <ProjectForm users={this.state.users}
+                                         createProject={(name, users) => this.createProject(name, users)}/>}/>
+                        {/*<Route exact path='/projects/:id/update' component={() =>*/}
+                        {/*    <UpProjectForm users={this.state.users} projects={this.state.projects}*/}
+                        {/*                   updateProject={(name, users, id) => this.updateProject(name, users, id)}/>}/>*/}
+                        <Route exact path='/projects/update' component={() =>
+                            <UpProjectForm users={this.state.users} projects={this.state.projects}
+                                           updateProject={(name, users, id) => this.updateProject(name, users, id)}/>}/>
                         <Route exact path='/projects' component={() => <ProjectList projects={this.state.projects}
                                                                                     users={this.state.users}
                                                                                     deleteProject={(id) => this.deleteProject(id)}/>}/>
@@ -232,7 +255,8 @@ class App extends React.Component {
                                              todos={this.state.todos}/>
                         </Route>
                         <Route exact path='/todo/create' component={() =>
-                            <ToDoForm users = {this.state.users} projects={this.state.projects} createToDo={(project, text, create_user) => this.createToDo(project, text, create_user)}/>}/>
+                            <ToDoForm users={this.state.users} projects={this.state.projects}
+                                      createToDo={(project, text, create_user) => this.createToDo(project, text, create_user)}/>}/>
                         <Route exact path='/todo'
                                component={() => <ToDoList todos={this.state.todos} users={this.state.users}
                                                           projects={this.state.projects}

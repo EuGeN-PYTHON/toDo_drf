@@ -1,11 +1,12 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 
-class ProjectForm extends React.Component {
+class UpProjectForm extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {name: '', users: []}
+        this.state = {name: '', users: [], id: 0}
     }
+
 
     handleChange(event) {
         this.setState({
@@ -30,6 +31,7 @@ class ProjectForm extends React.Component {
     // }
 
     handleUsersChange(event) {
+        // const {id} = useParams();
         if (!event.target.selectedOptions) {
 
             this.setState({
@@ -41,18 +43,19 @@ class ProjectForm extends React.Component {
         for (let i = 0; i < event.target.selectedOptions.length; i++) {
             users.push(event.target.selectedOptions.item(i).value)
         }
-        // const params = useParams();
-        // const current = params.id
+        // UseID()
         this.setState({
-            'users': users
-            // 'id': current
+            'users': users,
+
         })
+
     }
 
 
     handleSubmit(event) {
-        // console.log(this.state.name + ' ' + this.state.users)
-        this.props.createProject(this.state.name, this.state.users)
+
+        // console.log(this.state.name + ' ' + this.state.users + ' id =  ' + this.state.id)
+        this.props.updateProject(this.state.name, this.state.users, this.state.id)
         event.preventDefault();
     }
 
@@ -65,6 +68,15 @@ class ProjectForm extends React.Component {
                         <input type="text" className="form-control" name="name" placeholder="name"
                                value={this.state.name} onChange={(event) => this.handleChange(event)}/>
                     </div>
+                    <div className="form-group">
+                        <label htmlFor="id">ID</label>
+                        <select className="form-control" name="id"
+                                onChange={(event) => this.handleChange(event)}>
+                            {this.props.projects.map((item) =>
+                                <option value={item.id}>{item.name}</option>)}
+                        </select>
+                    </div>
+
                     <div className="form-group">
                         <label htmlFor="users">users</label>
                         {/*<input type="number" className="form-control" name="users" placeholder="users"*/}
@@ -87,4 +99,13 @@ class ProjectForm extends React.Component {
     }
 }
 
-export default ProjectForm
+// const UseID = () => {
+//     const params = useParams();
+//     const current = params.id
+//     this.setState({
+//         'id': Number(current)
+//     })
+// }
+
+
+export default UpProjectForm

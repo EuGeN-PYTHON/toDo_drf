@@ -47,7 +47,13 @@ const ProjectList = (
                                                         deleteProject={deleteProject}/>)}
             </table>
             <div className="Link_array">
+                {/*{projects.map((project) => <ProjectItem project={project} users={users}*/}
+                {/*                                        deleteProject={deleteProject}/>)}*/}
                 <Link to='/projects/create'>Create Project</Link>
+                {/*<Link to={`/projects/update`}>Update Project</Link>*/}
+            </div>
+            <div className="Link_array">
+                <Link to={`/projects/update`}>Update Project</Link>
             </div>
         </div>
     )
