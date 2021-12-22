@@ -38,7 +38,7 @@
 }
 
 .TABLE {
-    margin: 0 auto ;
+    margin: 0 auto;
     margin-top: 20px;
     width: 300px; /* Ширина таблицы */
     border-collapse: collapse; /* Убираем двойные линии между ячейками */
@@ -54,28 +54,36 @@
 }
 
 
-body {margin:0;}
+body {
+    margin: 0;
+}
+
 h2 {
-  font-family: monospace;
-  color: #606060;
+    font-family: monospace;
+    color: #606060;
 }
+
 ul {
-  list-style: none;
-  margin: 0 auto;
+    list-style: none;
+    margin: 0 auto;
 }
+
 a {
-  text-decoration: none;
-  font-family: 'Lora', serif;
-  transition: .5s linear;
+    text-decoration: none;
+    font-family: 'Lora', serif;
+    transition: .5s linear;
 }
+
 i {
-  margin-right: 10px;
+    margin-right: 10px;
 }
+
 nav {
-  display: block;
-  width: 660px;
-  margin: 0 auto 30px;
+    display: block;
+    width: 660px;
+    margin: 0 auto 30px;
 }
+
 .three ul {
     padding: 0;
     display: flex;
@@ -83,23 +91,68 @@ nav {
     justify-content: space-between;
     background: #E4EFD1;
 }
+
 .three li {
     /*display: block;*/
     /*flex-direction: row;*/
     /*justify-content: space-between;*/
 }
+
 .three a {
-  padding: 1em;
-  display: block;
-  color: #74924C;
-  border-right: 1px solid #BAD78B;
-  background: rgba(186, 215, 139, .3);
+    padding: 1em;
+    display: block;
+    color: #74924C;
+    border-right: 1px solid #BAD78B;
+    background: rgba(186, 215, 139, .3);
 }
-.three a:hover {background: #BAD78B}
+
+.three a:hover {
+    background: #BAD78B
+}
 
 .FOOTER {
-    border: 1px solid #74924C;
-    margin-top: 30px;
+    /*border: 1px solid #74924C;*/
+    /*margin-top: 30px;*/
+    /*text-align: center;*/
+    /*color: #74924C;*/
+    /*width: 660px;*/
     text-align: center;
-    color: #74924C;
+    border: 1px solid #74924C;
+    width: 660px;
+    display: block;
+    margin: 20px auto 30px;
+
+}
+
+.btn-out {
+    /*padding: 0;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    background: #E4EFD1;
+}
+
+.TD_RED {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+    background: RED;
+}
+
+.Link_array {
+    text-align: center;
+    border: 1px solid #74924C;
+    width: 660px;
+    display: block;
+    margin: 20px auto 30px;
+}
+
+.Form_input {
+    text-align: center;
+    /*border: 1px solid #74924C;*/
+    width: 660px;
+    display: block;
+    margin: 20px auto 30px;
+}
+.form_group {
+    margin-top: 15px;
 }
